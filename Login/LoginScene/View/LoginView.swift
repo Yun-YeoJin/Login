@@ -30,6 +30,10 @@ class LoginView: BaseView {
         $0.backgroundColor = Constants.BaseColor.textFieldBackground
         $0.layer.cornerRadius = Constants.Design.cornerRadius
         $0.textAlignment = .center
+        $0.keyboardType = .default
+        $0.textContentType = .oneTimeCode
+        $0.isSecureTextEntry = true
+
     }
     
     let loginButton = UIButton().then {

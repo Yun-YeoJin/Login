@@ -30,6 +30,7 @@ class SignupView: BaseView {
         $0.backgroundColor = Constants.BaseColor.textFieldBackground
         $0.layer.cornerRadius = Constants.Design.cornerRadius
         $0.textAlignment = .left
+        $0.keyboardType = .emailAddress
     }
     
     let passwordTextField = UITextField().then {
@@ -37,6 +38,9 @@ class SignupView: BaseView {
         $0.backgroundColor = Constants.BaseColor.textFieldBackground
         $0.layer.cornerRadius = Constants.Design.cornerRadius
         $0.textAlignment = .left
+        $0.keyboardType = .default
+        $0.textContentType = .oneTimeCode
+        $0.isSecureTextEntry = true
     }
     
     let signupButton = UIButton().then {
