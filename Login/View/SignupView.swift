@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SignupView: BaseView {
+final class SignupView: BaseView {
     
     let signupLabel = UILabel().then {
         $0.text = "회원가입"
@@ -18,14 +18,20 @@ class SignupView: BaseView {
         $0.textColor = .label
     }
     
-    let nickNameTextField = UITextField().then {
+    var nickNameTextField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(string: "  닉네임을 입력하세요.", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.placeholder])
         $0.backgroundColor = Constants.BaseColor.textFieldBackground
         $0.layer.cornerRadius = Constants.Design.cornerRadius
         $0.textAlignment = .left
     }
     
-    let emailTextField = UITextField().then {
+    let nickNameValidLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 13)
+        $0.textColor = .label
+    }
+    
+    
+    var emailTextField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(string: "  이메일 주소를 입력하세요.", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.placeholder])
         $0.backgroundColor = Constants.BaseColor.textFieldBackground
         $0.layer.cornerRadius = Constants.Design.cornerRadius
@@ -33,7 +39,12 @@ class SignupView: BaseView {
         $0.keyboardType = .emailAddress
     }
     
-    let passwordTextField = UITextField().then {
+    let emailValidLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 13)
+        $0.textColor = .label
+    }
+    
+    var passwordTextField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(string: "  비밀번호를 입력하세요.", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.placeholder])
         $0.backgroundColor = Constants.BaseColor.textFieldBackground
         $0.layer.cornerRadius = Constants.Design.cornerRadius
@@ -41,6 +52,11 @@ class SignupView: BaseView {
         $0.keyboardType = .default
         $0.textContentType = .oneTimeCode
         $0.isSecureTextEntry = true
+    }
+    
+    let passwordValidLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 13)
+        $0.textColor = .label
     }
     
     let signupButton = UIButton().then {
@@ -58,7 +74,7 @@ class SignupView: BaseView {
     
     override func configureUI() {
         
-        [signupLabel, nickNameTextField, emailTextField, passwordTextField, signupButton].forEach {
+        [signupLabel, nickNameTextField, nickNameValidLabel,emailTextField, emailValidLabel, passwordTextField, signupButton, passwordValidLabel].forEach {
             self.addSubview($0)
         }
         
@@ -74,24 +90,42 @@ class SignupView: BaseView {
         nickNameTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(signupLabel.snp.bottom).offset(30)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
+        }
+        
+        nickNameValidLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(nickNameTextField.snp.bottom).offset(8)
+            make.height.equalTo(30)
         }
         
         emailTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(nickNameTextField.snp.bottom).offset(12)
-            make.height.equalTo(60)
+            make.top.equalTo(nickNameValidLabel.snp.bottom).offset(16)
+            make.height.equalTo(50)
+        }
+        
+        emailValidLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(emailTextField.snp.bottom).offset(8)
+            make.height.equalTo(30)
         }
         
         passwordTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
-            make.height.equalTo(60)
+            make.top.equalTo(emailValidLabel.snp.bottom).offset(16)
+            make.height.equalTo(50)
+        }
+        
+        passwordValidLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(8)
+            make.height.equalTo(30)
         }
         
         signupButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
+            make.top.equalTo(passwordValidLabel.snp.bottom).offset(20)
             make.height.equalTo(60)
         }
         
