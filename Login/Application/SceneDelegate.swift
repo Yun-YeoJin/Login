@@ -16,9 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let vc = SignupViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        window?.rootViewController = nav
+        if UserManager.token != "" {
+            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        } else {
+            window?.rootViewController = UINavigationController(rootViewController: SignupViewController())
+        }
         
         window?.makeKeyAndVisible()
     }
